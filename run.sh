@@ -14,8 +14,10 @@ while true; do
 			export githubToken=$githubToken					# and set it as an env var
 		fi
 
-		./updater/run.sh &	# Run the updater (in the background)
-		subscripts+=$!		# and push its PID to subscripts
+		./run.py  # python background entrypoint
+
+		./updater/run.sh &  # Run the updater (in the background)
+		subscripts+=$!      # and push its PID to subscripts
 
 		trap "kill ${subscripts[*]}" SIGINT	 # Kill all subscripts on SIGINT (^C)
 		wait								 # Wait for all subscripts to die
